@@ -1,0 +1,29 @@
+public class asalsayiyazdirma {
+    public static void main(String[] args) {
+        int n = 20; 
+        int[] asalSayilar = new int[n];
+        int sayi = 2; 
+        for (int i = 0; i < n; ) {
+            if (asalMi(sayi)) {
+                asalSayilar[i] = sayi;
+                i++;
+            }
+            sayi++;
+        }
+        System.out.println("ilk 20 Asal Sayi:");
+        for (int i = 0; i < n; i++) {
+            System.out.print(asalSayilar[i] + " ");
+        }
+    }
+    private static boolean asalMi(int sayi) {
+        if (sayi < 2) {
+            return false;
+        }
+        for (int i = 2; i <= Math.sqrt(sayi); i++) {
+            if (sayi % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
