@@ -1,0 +1,71 @@
+import java.util.Random;
+import java.util.Scanner;
+public class 11 {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+        int userScore = 0;
+        int computerScore = 0;
+        int roundsToWin = 3;
+        System.out.println("Taş (0), Kağıt (1), Makas (2) oyununa hoş geldiniz!");
+        while (userScore < roundsToWin && computerScore < roundsToWin) {
+            System.out.print("Seçiminizi yapın (0: Taş, 1: Kağıt, 2: Makas): ");
+            int userChoice = scanner.nextInt();
+            int computerChoice = random.nextInt(3);   
+            displayChoice("Kullanıcı", userChoice);
+            displayChoice("Bilgisayar", computerChoice);
+            int winner = determineWinner(userChoice, computerChoice);
+            displayWinner(winner);        
+            if (winner == 0) {
+                userScore++;
+            } else if (winner == 1) {
+                computerScore++;
+            }
+            System.out.println("Skor - Kullanıcı: " + userScore + " Bilgisayar: " + computerScore);
+            System.out.println();
+        }
+
+        if (userScore >= roundsToWin) {
+            System.out.println("Tebrikler! Oyunu kazandınız!");
+        } else {
+            System.out.println("Maalesef, bilgisayar oyunu kazandı.");
+        }      
+        scanner.close();
+    }
+    private static void displayChoice(String player, int choice) {
+        System.out.println(player + " seçimi: " + choiceToString(choice));
+    }
+    private static String choiceToString(int choice) {
+        switch (choice) {
+            case 0:
+                return "Taş";
+            case 1:
+                return "Kağıt";
+            case 2:
+                return "Makas";
+            default:
+                return "Geçersiz Seçim";
+        }
+   }
+    private static int determineWinner(int userChoice, int computerChoice) {
+        if (userChoice == computerChoice) {
+            return 0; 
+        } else if ((userChoice == 0 && computerChoice == 2) ||
+                   (userChoice == 1 && computerChoice == 0) ||
+                   (userChoice == 2 && computerChoice == 1)) {
+            return 2; 
+        } else {
+            return 1; 
+        }
+    }
+    private static void displayWinner(int winner) {
+        if (winner == 0) {
+            System.out.println("Berabere!");
+        } else if (winner == 1) {
+            System.out.println("Bilgisayar kazandı!");
+        } else {
+            System.out.println("Kullanıcı kazandı!");
+        }
+    }
+}
